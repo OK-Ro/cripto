@@ -39,6 +39,9 @@ const SubSection = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 3px solid #ffffff;
+  @media (max-width: 768px) {
+    width: 90.1vw;
+  }
 `;
 
 const FullWidthSection = styled.div`

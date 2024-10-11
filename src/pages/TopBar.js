@@ -125,9 +125,7 @@ function TopBar() {
           {hasNotifications ? <IoNotifications /> : <IoNotificationsOff />}
           <NotificationDot show={hasNotifications} />
         </NotificationIcon>
-        <ConnectButton onClick={handleConnectClick}>
-          Connect Wallet
-        </ConnectButton>
+        <ConnectButton onClick={handleConnectClick}>Wallet</ConnectButton>
       </TopBarContainer>
 
       {activeModal && (

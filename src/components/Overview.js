@@ -1,10 +1,9 @@
-// src/components/Overview.js
 import React, { useReducer, useEffect, useState } from "react";
 import styled from "styled-components";
 import { IoCaretUpSharp, IoCaretDownSharp } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
 import { GrFormViewHide } from "react-icons/gr";
-import { fakeData } from "../data/fakeData"; // Import the fake data
+import { fakeData } from "../data/fakeData";
 
 const OverviewContainer = styled.div`
   padding: 25px;
@@ -41,7 +40,7 @@ const TotalValue = styled.div`
 
 const ChangeIndicator = styled.div`
   font-size: 1.2rem;
-  color: ${({ isPositive }) => (isPositive ? "#27ae60" : "#e74c3c")};
+  color: ${({ isPositive }) => (isPositive ? "#39ff14" : "#ff073a")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +53,7 @@ const ChangeIndicator = styled.div`
 const ArrowIcon = styled.div`
   margin: 0 5px;
   font-size: 1.25rem;
-  color: ${({ isPositive }) => (isPositive ? "#27ae60" : "#e74c3c")};
+  color: ${({ isPositive }) => (isPositive ? "#39ff14" : "#ff073a")};
 `;
 
 const EyeIcon = styled.div`
@@ -72,7 +71,7 @@ const SparklineChart = styled.svg`
 const initialState = {
   totalHoldings: 0,
   previousTotal: 0,
-  trendData: [], // Initialize as an empty array
+  trendData: [],
 };
 
 function reducer(state, action) {
@@ -82,7 +81,7 @@ function reducer(state, action) {
         ...state,
         previousTotal: state.totalHoldings,
         totalHoldings: action.payload,
-        trendData: [...state.trendData, action.payload].slice(-30), // Keep last 30 data points
+        trendData: [...state.trendData, action.payload].slice(-30),
       };
     default:
       return state;
@@ -140,8 +139,8 @@ function Overview() {
 
     const trendColor =
       sparklineData[sparklineData.length - 1] > sparklineData[0]
-        ? "#27ae60"
-        : "#e74c3c";
+        ? "#39ff14"
+        : "#ff073a";
 
     return (
       <SparklineChart>
@@ -173,7 +172,6 @@ function Overview() {
     maximumFractionDigits: 2,
   }).format(state.totalHoldings);
 
-  // Example usage of calculatePercentageChange
   const trendData = [100, 150, 200];
   const percentageChange = calculatePercentageChange(trendData);
   console.log("Percentage Change:", percentageChange);

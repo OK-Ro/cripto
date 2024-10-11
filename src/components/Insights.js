@@ -1,4 +1,3 @@
-// src/components/Insights.js
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -62,12 +61,12 @@ const SparklineValue = styled.span`
 const ArrowIcon = styled.div`
   margin-left: 5px;
   font-size: 1.25rem;
-  color: ${({ isPositive }) => (isPositive ? "#27ae60" : "#e74c3c")};
+  color: ${({ isPositive }) => (isPositive ? "#39ff14" : "#ff073a")};
 `;
 
 const PercentageChange = styled.span`
   font-size: 1rem;
-  color: ${({ value }) => (value >= 0 ? "#27ae60" : "#e74c3c")};
+  color: ${({ value }) => (value >= 0 ? "#39ff14" : "#ff073a")};
   margin-left: 5px;
   display: flex;
   align-items: center;
@@ -95,13 +94,12 @@ function Insights() {
         setTotalMarketCap(data.total_market_cap.usd);
         setTotalVolume(data.total_volume.usd);
 
-        // Simulate trend data for demonstration purposes
         const simulatedTrend = Array.from(
           { length: 30 },
           () => Math.random() * 1000 + 5000
         );
         setMarketCapTrend(simulatedTrend);
-        setVolumeTrend(simulatedTrend.map((v) => v * 0.8)); // Simulate a related trend
+        setVolumeTrend(simulatedTrend.map((v) => v * 0.8));
         setLoading(false);
       } catch (error) {
         console.error("Error fetching global data:", error);
@@ -137,8 +135,8 @@ function Insights() {
 
     const trendColor =
       sparklineData[sparklineData.length - 1] > sparklineData[0]
-        ? "#27ae60"
-        : "#e74c3c";
+        ? "#39ff14"
+        : "#ff073a";
 
     return (
       <SparklineChart>

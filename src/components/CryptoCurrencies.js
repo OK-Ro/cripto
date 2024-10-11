@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// Styled components for the layout
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -34,11 +33,6 @@ const Th = styled.th`
   font-size: 0.8rem;
   font-weight: 500;
   border-bottom: 2px solid #e0e0e0;
-
-  @media (max-width: 768px) {
-    font-size: 0.7rem;
-    padding: 10px;
-  }
 `;
 
 const Td = styled.td`
@@ -50,11 +44,6 @@ const Td = styled.td`
   font-size: 0.9rem;
   color: #333;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    padding: 10px;
-  }
 `;
 
 const HiddenOnMobile = styled.th`
@@ -63,15 +52,17 @@ const HiddenOnMobile = styled.th`
   }
 `;
 
-const HiddenTdOnMobile = styled.td`
+const HiddenTdOnMobile = styled(Td)`
   @media (max-width: 768px) {
     display: none;
   }
 `;
 
 const PercentageChange = styled.span`
-  color: ${({ value }) => (value >= 0 ? "#27ae60" : "#e74c3c")};
+  color: ${({ value }) =>
+    value >= 0 ? "#00ff00" : "#ff0000"}; /* Brighter green and red */
   font-weight: bold;
+  font-size: 1rem; /* Increase font size for emphasis */
 `;
 
 const CryptoName = styled.div`
@@ -108,25 +99,40 @@ const CryptoText = styled.span`
 `;
 
 const Dropdown = styled.select`
-  padding: 5px;
+  padding: 8px;
   margin: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
-    padding: 4px;
+    padding: 6px;
   }
 `;
 
 const SearchInput = styled.input`
-  padding: 5px;
+  padding: 8px;
   margin: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
   width: 200px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+
+  &:focus {
+    background-color: #e0e0e0;
+    outline: none;
+  }
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
@@ -257,8 +263,8 @@ function Cryptocurrencies() {
 
     const trendColor =
       sparklineData[sparklineData.length - 1] > sparklineData[0]
-        ? "#27ae60"
-        : "#e74c3c";
+        ? "#00ff00" // Brighter green
+        : "#ff0000"; // Brighter red
 
     return (
       <svg width={width} height={height}>
@@ -298,21 +304,27 @@ function Cryptocurrencies() {
             <Th>Name</Th>
             <Th>Price</Th>
             <HiddenOnMobile>
-              <Dropdown
-                value={changeDisplayType}
-                onChange={(e) => setChangeDisplayType(e.target.value)}
-              >
-                <option value="1h">1H Change</option>
-                <option value="24h">24H Change</option>
-                <option value="7d">7D Change</option>
-              </Dropdown>
+              <Th>
+                <Dropdown
+                  value={changeDisplayType}
+                  onChange={(e) => setChangeDisplayType(e.target.value)}
+                >
+                  <option value="1h">1H Change</option>
+                  <option value="24h">24H Change</option>
+                  <option value="7d">7D Change</option>
+                </Dropdown>
+              </Th>
             </HiddenOnMobile>
             <HiddenOnMobile>
-              <Dropdown onChange={toggleVolumeSort}>
-                <option value="volume">24H Volume</option>
-              </Dropdown>
+              <Th>
+                <Dropdown onChange={toggleVolumeSort}>
+                  <option value="volume">24H Volume</option>
+                </Dropdown>
+              </Th>
             </HiddenOnMobile>
-            <HiddenOnMobile>Market Cap</HiddenOnMobile>
+            <HiddenOnMobile>
+              <Th>Market Cap</Th>
+            </HiddenOnMobile>
             <Th>
               <Dropdown
                 value={chartDisplayType}
